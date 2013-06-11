@@ -28,12 +28,21 @@ class TestDatabase <Test::Unit::TestCase
 		assert @db.databasearray.include? @contact && @contact2	
 	end
 
-	def test_search_by_name
-		@db.search_by_name(@name)
-		assert_equal @contact, @db.search_by_name("Will")
+	def test_display_by_name
+		assert_equal @contact, @db.display_by_name("Will")
 	end
 
-	def test_inf
+	def test_info_by_attribute
+		assert_equal @contact.firstname, @db.info_by_attribute("firstname")
+	end
 
+	def test_modify
+		assert_equal @contact,@db.modify("Will", "firstname", "Tim")
+	end
+
+	def test_delete
+		@db.delete("Will")
+		assert_equal 1, @db.databasearray.length
+	end
 
 end
